@@ -20,6 +20,7 @@
     flex:1;
     position: relative;
     padding: 10px;
+
 }
 
 #mainTitle {
@@ -69,4 +70,25 @@
     position: absolute;
     right: 10px;
     bottom: 10px;
+}
+
+.gridContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    height: 100%;
+}
+
+.divs {
+    font-family: 'Audiowide', cursive;
+    background-color: red;
+    width: 100%;
+    height: 60px;
+    color:white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.divs > em {
+    color: cyan;
 }

@@ -6,3 +6,8 @@ const todayLi = document.querySelector('#todayLi')
 todayLi.addEventListener('click',() => {
     todoToday.run() 
 })
+
+todoToday.addTodo('fad','fadfa','fadaf','fadf')
+
+console.log(todoToday.todoList)
+todoToday.displayTodo()
