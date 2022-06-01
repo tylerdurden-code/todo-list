@@ -9,13 +9,14 @@
 
     run: function() {
         const content = document.querySelector('.content')
-        content.innerHTML = ""
+        const gridContainer = document.querySelector('.gridContainer')
+        gridContainer.innerHTML = ""
 
         const addBtn = document.createElement('button');
         addBtn.setAttribute('id','addTodo')
         addBtn.innerHTML = '+'
 
-        content.appendChild(addBtn)
+        gridContainer.appendChild(addBtn)
     },
     addTodo: function(title,description,dueDate,priority) {
         let newTodo = new this.todos(title,description,dueDate,priority)
