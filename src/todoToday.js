@@ -8,11 +8,12 @@
     todoList: [],
     addForm: function() {
         const gridContainer = document.querySelector('.gridContainer')
+        const gridContainerNew = document.querySelector('.gridContainerNew')
 
         const formDiv = document.createElement('div')
         formDiv.setAttribute('class','form')
         formDiv.setAttribute('id','form')
-        gridContainer.appendChild(formDiv);
+        gridContainerNew.appendChild(formDiv);
 
         const form = document.createElement('form');
         form.setAttribute('action','#');
@@ -48,6 +49,7 @@
         inputTitle.setAttribute('type','text')
         inputTitle.setAttribute('id','title')
         inputTitle.setAttribute('name','title')
+        inputTitle.setAttribute('required','required')
 
         formTitleDiv.appendChild(labelTitle);
         formTitleDiv.appendChild(inputTitle);
@@ -60,6 +62,7 @@
         inputDescription.setAttribute('type','text')
         inputDescription.setAttribute('id','description')
         inputDescription.setAttribute('name','description')
+        inputDescription.setAttribute('required','required')
 
         formDescriptionDiv.appendChild(labelDescription);
         formDescriptionDiv.appendChild(inputDescription);
@@ -69,9 +72,10 @@
         labelDueDate.innerHTML = 'DueDate:'
 
         const inputDueDate = document.createElement('input');
-        inputDueDate.setAttribute('type','text')
+        inputDueDate.setAttribute('type','date')
         inputDueDate.setAttribute('id','dueDate')
         inputDueDate.setAttribute('name','dueDate')
+        inputDueDate.setAttribute('required','required')
 
         formDueDateDiv.appendChild(labelDueDate);
         formDueDateDiv.appendChild(inputDueDate);
@@ -85,6 +89,7 @@
         inputPriority1.setAttribute('id','priority1')
         inputPriority1.setAttribute('name','priority')
         inputPriority1.setAttribute('value','priority1')
+        inputPriority1.setAttribute('required','required')
 
         const labelPriority1 = document.createElement('label');
         labelPriority1.setAttribute('for','priority1');
@@ -119,13 +124,38 @@
         radioDiv.appendChild(inputPriority3);
         radioDiv.appendChild(labelPriority3);
 
+        form.addEventListener('submit',(event => {
+            event.preventDefault();
+            const title = form.elements['title']
+            const description = form.elements['description']
+            const dueDate = form.elements['dueDate']
+            const radio = form.elements['priority']
+            this.addTodo(title.value,description.value,dueDate.value,radio.value)
+            this.displayTodo();
+            // console.log(title.value)
+            // console.log(description.value)
+            // console.log(dueDate.value)
+            // console.log(radio.value)
+            form.reset();
+        }))
+
 
     },
     run: function() {
         const content = document.querySelector('.content')
-        const gridContainer = document.querySelector('.gridContainer')
+        content.innerHTML = ''
+        // const gridContainer = document.querySelector('.gridContainer')
+        const gridContainerNew = document.createElement('div')
+        const todoss = document.createElement('div')
+        todoss.setAttribute('id','todoss')
+        gridContainerNew.setAttribute('class','gridContainerNew')
+        // const whatever = content.removeChild(gridContainer)
+        content.appendChild(todoss)
+        content.appendChild(gridContainerNew);
+
         const form = document.querySelector('#form')
-        gridContainer.innerHTML = ""
+        // gridContainer.innerHTML = ""
+        gridContainerNew.innerHTML = ''
 
         this.addForm();
 
@@ -142,7 +172,9 @@
             
         })
 
-        gridContainer.appendChild(addBtn)
+        gridContainerNew.appendChild(addBtn)
+
+        this.displayTodo();
     },
     addTodo: function(title,description,dueDate,priority) {
         let newTodo = new this.todos(title,description,dueDate,priority)
@@ -151,12 +183,15 @@
 
     displayTodo: function() {
         const gridContainer = document.querySelector('.gridContainer')
+        const gridContainerNew = document.querySelector('.gridContainerNew')
+        const todoss = document.querySelector('#todoss')
+        todoss.innerHTML = ""
         this.todoList.forEach(element => {
             let newDiv = document.createElement('div')
             newDiv.classList.add('divs')
             newDiv.innerHTML = `${element.title} ${element.description} ${element.dueDate} ${element.priority} `
 
-            gridContainer.appendChild(newDiv)
+            todoss.appendChild(newDiv)
         });
     }
 }
