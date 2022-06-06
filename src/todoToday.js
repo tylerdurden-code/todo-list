@@ -1,9 +1,20 @@
  var todoToday = {
+     i:0,
     todos: function(title,description,dueDate,priority) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.priority = priority;
+        switch(priority) {
+            case 'priority1':
+                this.priority = 'red'
+                break;
+            case 'priority2':
+                this.priority = 'yellow';
+                break;
+            case 'priority3':
+                this.priority = 'blue';
+                break;
+        }
     },
     todoList: [],
     addForm: function() {
@@ -189,9 +200,18 @@
         this.todoList.forEach(element => {
             let newDiv = document.createElement('div')
             newDiv.classList.add('divs')
+            newDiv.setAttribute('id',`prio${this.i}`)
             newDiv.innerHTML = `${element.title} ${element.description} ${element.dueDate} ${element.priority} `
+            if (element.priority === 'blue') {
+                newDiv.style.backgroundColor = 'blue';
+            }
+            if (element.priority === 'yellow') {
+                newDiv.style.backgroundColor = 'yellow';
+                newDiv.style.color = 'black';
+            }
 
             todoss.appendChild(newDiv)
+            this.i++
         });
     }
 }
