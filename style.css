@@ -54,8 +54,20 @@
     
 }
 
-#projects {
-    list-style-type: none;
+#ulProjects {
+    font-size: .8em;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#ulProjects > li > button {
+    border: none;
+    background-color: red;
+    color: white;
+    padding: 5px;
+    cursor: pointer;
 }
 
 #addTodo {
@@ -102,8 +114,10 @@
     border-radius: 10px;
 }
 
-.divs > em {
-    color: cyan;
+.ems {
+    color: red;
+    background-color: black;
+    padding:4px;
 }
 
 .form {
@@ -155,4 +169,13 @@ input[type=submit] {
     border: 5px solid green;
     width: 80%;
     gap: 5px;
+}
+
+#projects {
+    cursor:default;
+}
+
+#projects:hover {
+    background-color: white;
+    border: none;
 }

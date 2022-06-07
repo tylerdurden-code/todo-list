@@ -201,7 +201,7 @@
             let newDiv = document.createElement('div')
             newDiv.classList.add('divs')
             newDiv.setAttribute('id',`prio${this.i}`)
-            newDiv.innerHTML = `${element.title} ${element.description} ${element.dueDate} ${element.priority} `
+            newDiv.innerHTML = `${element.title} <em class="ems">${element.description}</em> ${element.dueDate}`
             if (element.priority === 'blue') {
                 newDiv.style.backgroundColor = 'blue';
             }
