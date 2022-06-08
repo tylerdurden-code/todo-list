@@ -201,7 +201,16 @@
             let newDiv = document.createElement('div')
             newDiv.classList.add('divs')
             newDiv.setAttribute('id',`prio${this.i}`)
-            newDiv.innerHTML = `${element.title} <em class="ems">${element.description}</em> ${element.dueDate}`
+            let infoDiv = document.createElement('div');
+            infoDiv.innerHTML = `${element.title} <em class="ems">${element.description}</em> ${element.dueDate}`
+            newDiv.appendChild(infoDiv);
+            let deleteBtn = document.createElement('button');
+            deleteBtn.innerHTML = 'Xaaaaa'
+            deleteBtn.setAttribute('id','deleteBtn')
+            deleteBtn.addEventListener('click',() => {
+                console.log('boursinos')
+            })
+            newDiv.appendChild(deleteBtn);
             if (element.priority === 'blue') {
                 newDiv.style.backgroundColor = 'blue';
             }

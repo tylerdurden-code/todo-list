@@ -66,8 +66,13 @@
     border: none;
     background-color: red;
     color: white;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
+}
+
+#ulProjects > li > button:hover {
+    background-color: black;
+    color: red;
 }
 
 #addTodo {
@@ -112,6 +117,8 @@
     color:white;
     padding: 10px;
     border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .ems {
@@ -178,4 +185,8 @@ input[type=submit] {
 #projects:hover {
     background-color: white;
     border: none;
+}
+
+#deleteBtn {
+    cursor: pointer;
 }
