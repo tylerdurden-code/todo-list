@@ -20,6 +20,7 @@
     flex:1;
     position: relative;
     padding: 10px;
+    width: 100vw;
 
 }
 
@@ -84,9 +85,9 @@
     background-color: red;
     font-family: 'Audiowide', cursive;
     text-align: center;
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+    position: sticky;
+    left: 2000px;
+    top: 2000px;
 }
 
 .gridContainer {
@@ -102,11 +103,12 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
-    height: 100%;
     border: 5px solid green;
     /* justify-content: center; */
     align-items: center;
-    position: relative;
+    position: sticky;
+    top: 850px;
+    height: 100vh;
 }
 
 .divs {
@@ -137,6 +139,7 @@
     display: none;
     position: absolute;
     top: 400px;
+    left: 250px;
 }
 
 #formUp {
@@ -167,7 +170,8 @@ input[type=submit] {
   }
   input[type=submit]:hover {
     background-color: black;
-  }
+}
+
 
 #todoss {
     display: flex;
@@ -176,6 +180,8 @@ input[type=submit] {
     border: 5px solid green;
     width: 80%;
     gap: 5px;
+    max-height: 100%;
+    overflow: scroll;
 }
 
 #projects {
@@ -189,4 +195,13 @@ input[type=submit] {
 
 #deleteBtn {
     cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+}
+
+
+#todoss::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
 }

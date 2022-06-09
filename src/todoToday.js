@@ -20,11 +20,12 @@
     addForm: function() {
         const gridContainer = document.querySelector('.gridContainer')
         const gridContainerNew = document.querySelector('.gridContainerNew')
+        const content = document.querySelector('.content')
 
         const formDiv = document.createElement('div')
         formDiv.setAttribute('class','form')
         formDiv.setAttribute('id','form')
-        gridContainerNew.appendChild(formDiv);
+        content.appendChild(formDiv);
 
         const form = document.createElement('form');
         form.setAttribute('action','#');
@@ -162,7 +163,7 @@
         gridContainerNew.setAttribute('class','gridContainerNew')
         // const whatever = content.removeChild(gridContainer)
         content.appendChild(todoss)
-        content.appendChild(gridContainerNew);
+        // content.appendChild(gridContainerNew);
 
         const form = document.querySelector('#form')
         // gridContainer.innerHTML = ""
@@ -183,7 +184,7 @@
             
         })
 
-        gridContainerNew.appendChild(addBtn)
+        content.appendChild(addBtn)
 
         this.displayTodo();
     },
@@ -205,10 +206,12 @@
             infoDiv.innerHTML = `${element.title} <em class="ems">${element.description}</em> ${element.dueDate}`
             newDiv.appendChild(infoDiv);
             let deleteBtn = document.createElement('button');
-            deleteBtn.innerHTML = 'Xaaaaa'
+            deleteBtn.innerHTML = 'X'
             deleteBtn.setAttribute('id','deleteBtn')
             deleteBtn.addEventListener('click',() => {
-                console.log('boursinos')
+                const iter = this.todoList.indexOf(element)
+                deleteBtn.parentElement.remove();
+                this.todoList.splice(iter,1)
             })
             newDiv.appendChild(deleteBtn);
             if (element.priority === 'blue') {

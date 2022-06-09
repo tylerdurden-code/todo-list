@@ -8,7 +8,9 @@ todayLi.addEventListener('click',() => {
     // todoToday.displayTodo();
 })
 
-// todoToday.addTodo('fad','fadfa','fadaf','priority3')
+todoToday.addTodo('Title','Description','15-09-1997','priority3')
+
+
 
 console.log(todoToday.todoList)
 // todoToday.displayTodo()
