@@ -1,3 +1,5 @@
+
+ 
  var todoToday = {
      i:0,
     todos: function(title,description,dueDate,priority) {
@@ -205,15 +207,37 @@
             let infoDiv = document.createElement('div');
             infoDiv.innerHTML = `${element.title} <em class="ems">${element.description}</em> ${element.dueDate}`
             newDiv.appendChild(infoDiv);
+            let buttonsDiv = document.createElement('div')
+            buttonsDiv.setAttribute('id','buttonsDiv')
+            newDiv.appendChild(buttonsDiv);
+
             let deleteBtn = document.createElement('button');
-            deleteBtn.innerHTML = 'X'
             deleteBtn.setAttribute('id','deleteBtn')
+            let deleteImg = document.createElement('img')
+            deleteImg.setAttribute('src','./img/close.svg')
+            deleteImg.setAttribute('width','25px')
+            deleteImg.setAttribute('height','25px')
+            deleteBtn.appendChild(deleteImg)
             deleteBtn.addEventListener('click',() => {
                 const iter = this.todoList.indexOf(element)
-                deleteBtn.parentElement.remove();
+                buttonsDiv.parentElement.remove();
                 this.todoList.splice(iter,1)
             })
-            newDiv.appendChild(deleteBtn);
+            buttonsDiv.appendChild(deleteBtn);
+
+            let editBtn = document.createElement('button')
+            editBtn.setAttribute('id','editBtn');
+            let editImg = document.createElement('img')
+            editImg.setAttribute('src','./img/edit.svg')
+            editImg.setAttribute('width','25px')
+            editImg.setAttribute('height','25px')
+            editBtn.appendChild(editImg)
+            buttonsDiv.appendChild(editBtn)
+
+            editBtn.addEventListener('click',() => {
+                
+            })
+
             if (element.priority === 'blue') {
                 newDiv.style.backgroundColor = 'blue';
             }
