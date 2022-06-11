@@ -19,19 +19,21 @@
         }
     },
     todoList: [],
-    addForm: function() {
+    addForm: function(formClass,formId,editFormBool = false) {
+        
         const gridContainer = document.querySelector('.gridContainer')
         const gridContainerNew = document.querySelector('.gridContainerNew')
         const content = document.querySelector('.content')
 
         const formDiv = document.createElement('div')
-        formDiv.setAttribute('class','form')
-        formDiv.setAttribute('id','form')
+        formDiv.setAttribute('class',formClass)
+        formDiv.setAttribute('id',formClass)
         content.appendChild(formDiv);
+
 
         const form = document.createElement('form');
         form.setAttribute('action','#');
-        form.setAttribute('id','formUp')
+        form.setAttribute('id',formId)
         formDiv.appendChild(form);
 
         const formTitleDiv = document.createElement('div');
@@ -153,6 +155,9 @@
             form.reset();
         }))
 
+        if (editFormBool === true) {
+            console.log('yay')
+        }
 
     },
     run: function() {
@@ -167,11 +172,12 @@
         content.appendChild(todoss)
         // content.appendChild(gridContainerNew);
 
-        const form = document.querySelector('#form')
+        
         // gridContainer.innerHTML = ""
         gridContainerNew.innerHTML = ''
 
-        this.addForm();
+        this.addForm('form','formUp');
+        // this.addForm('editForm','editFormUp');
 
         const addBtn = document.createElement('button');
         addBtn.setAttribute('id','addTodo')
@@ -185,6 +191,18 @@
             }
             
         })
+        const form = document.querySelector('#form')
+        const editForm =  document.querySelector('#editForm')
+
+        form.addEventListener('click',()=> {
+            editForm.style.zIndex = '1';
+            form.style.zIndex = '2'
+        })
+
+        // editForm.addEventListener('click',()=> {
+        //     form.style.zIndex = '1';
+        //     editForm.style.zIndex = '2'
+        // })
 
         content.appendChild(addBtn)
 
@@ -235,7 +253,7 @@
             buttonsDiv.appendChild(editBtn)
 
             editBtn.addEventListener('click',() => {
-                
+                this.addForm('editForm','editFormUp');
             })
 
             if (element.priority === 'blue') {
