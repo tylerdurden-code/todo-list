@@ -156,8 +156,27 @@
         }))
 
         if (editFormBool === true) {
-            console.log('yay')
+           
         }
+
+    },
+    editFormFunc: function() {
+
+        
+
+        this.addForm('editForm','editFormUp',true);
+
+        const editForm =  document.querySelector('#editForm')
+        const form = document.querySelector('#form')
+        editForm.addEventListener('click',()=> {
+            form.style.zIndex = '1';
+            editForm.style.zIndex = '2'
+        })
+
+        form.addEventListener('click',()=> {
+            editForm.style.zIndex = '1';
+            form.style.zIndex = '2'
+        })
 
     },
     run: function() {
@@ -194,10 +213,10 @@
         const form = document.querySelector('#form')
         const editForm =  document.querySelector('#editForm')
 
-        form.addEventListener('click',()=> {
-            editForm.style.zIndex = '1';
-            form.style.zIndex = '2'
-        })
+        // form.addEventListener('click',()=> {
+        //     editForm.style.zIndex = '1';
+        //     form.style.zIndex = '2'
+        // })
 
         // editForm.addEventListener('click',()=> {
         //     form.style.zIndex = '1';
@@ -253,7 +272,7 @@
             buttonsDiv.appendChild(editBtn)
 
             editBtn.addEventListener('click',() => {
-                this.addForm('editForm','editFormUp');
+                this.editFormFunc();
             })
 
             if (element.priority === 'blue') {
