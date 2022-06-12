@@ -2,10 +2,11 @@
  
  var todoToday = {
      i:0,
-    todos: function(title,description,dueDate,priority) {
+    todos: function(title,description,dueDate,priority,ide) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
+        this.ide = ide
         switch(priority) {
             case 'priority1':
                 this.priority = 'red'
@@ -19,7 +20,10 @@
         }
     },
     todoList: [],
-    addForm: function(formClass,formId,editFormBool = false) {
+    editOpen: {
+
+    },
+    addForm: function(formClass,formId,ide = null,editFormBool = false) {
         
         const gridContainer = document.querySelector('.gridContainer')
         const gridContainerNew = document.querySelector('.gridContainerNew')
@@ -27,6 +31,7 @@
 
         const formDiv = document.createElement('div')
         formDiv.setAttribute('class',formClass)
+        formDiv.classList.add(ide)
         formDiv.setAttribute('id',formClass)
         content.appendChild(formDiv);
 
@@ -146,7 +151,7 @@
             const description = form.elements['description']
             const dueDate = form.elements['dueDate']
             const radio = form.elements['priority']
-            this.addTodo(title.value,description.value,dueDate.value,radio.value)
+            this.addTodo(title.value,description.value,dueDate.value,radio.value,ide)
             this.displayTodo();
             // console.log(title.value)
             // console.log(description.value)
@@ -160,12 +165,12 @@
         }
 
     },
-    editFormFunc: function() {
+    editFormFunc: function(id) {
 
         
-
-        this.addForm('editForm','editFormUp',true);
-
+        if (this.editOpen[id] === true) {
+            this.addForm('editForm','editFormUp',id,true);
+        }
         const editForm =  document.querySelector('#editForm')
         const form = document.querySelector('#form')
         editForm.addEventListener('click',()=> {
@@ -227,8 +232,8 @@
 
         this.displayTodo();
     },
-    addTodo: function(title,description,dueDate,priority) {
-        let newTodo = new this.todos(title,description,dueDate,priority)
+    addTodo: function(title,description,dueDate,priority,ide) {
+        let newTodo = new this.todos(title,description,dueDate,priority,ide)
         this.todoList.push(newTodo)
     },
 
@@ -241,6 +246,7 @@
             let newDiv = document.createElement('div')
             newDiv.classList.add('divs')
             newDiv.setAttribute('id',`prio${this.i}`)
+            this.editOpen[newDiv.id] = false;
             let infoDiv = document.createElement('div');
             infoDiv.innerHTML = `${element.title} <em class="ems">${element.description}</em> ${element.dueDate}`
             newDiv.appendChild(infoDiv);
@@ -272,7 +278,15 @@
             buttonsDiv.appendChild(editBtn)
 
             editBtn.addEventListener('click',() => {
-                this.editFormFunc();
+                let div = editBtn.parentNode.parentNode;
+                if (this.editOpen[div.id] === true) {
+                    this.editOpen[div.id] === false;
+                }
+                else {
+                    this.editOpen[div.id] = true;
+                }
+                
+                this.editFormFunc(div.id);
             })
 
             if (element.priority === 'blue') {
