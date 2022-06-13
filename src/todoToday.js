@@ -2,11 +2,11 @@
  
  var todoToday = {
      i:0,
-    todos: function(title,description,dueDate,priority,ide) {
+    todos: function(title,description,dueDate,priority) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.ide = ide
+        this.editOpen = false;
         switch(priority) {
             case 'priority1':
                 this.priority = 'red'
@@ -151,7 +151,7 @@
             const description = form.elements['description']
             const dueDate = form.elements['dueDate']
             const radio = form.elements['priority']
-            this.addTodo(title.value,description.value,dueDate.value,radio.value,ide)
+            this.addTodo(title.value,description.value,dueDate.value,radio.value)
             this.displayTodo();
             // console.log(title.value)
             // console.log(description.value)
@@ -167,21 +167,12 @@
     },
     editFormFunc: function(id) {
 
-        
-        if (this.editOpen[id] === true) {
-            this.addForm('editForm','editFormUp',id,true);
+        if (this.editOpen[id]) {
+            return;
         }
-        const editForm =  document.querySelector('#editForm')
-        const form = document.querySelector('#form')
-        editForm.addEventListener('click',()=> {
-            form.style.zIndex = '1';
-            editForm.style.zIndex = '2'
-        })
 
-        form.addEventListener('click',()=> {
-            editForm.style.zIndex = '1';
-            form.style.zIndex = '2'
-        })
+        this.editOpen[id] = true;
+        this.addForm('editForm','editFormUp',id,true);
 
     },
     run: function() {
@@ -232,8 +223,8 @@
 
         this.displayTodo();
     },
-    addTodo: function(title,description,dueDate,priority,ide) {
-        let newTodo = new this.todos(title,description,dueDate,priority,ide)
+    addTodo: function(title,description,dueDate,priority) {
+        let newTodo = new this.todos(title,description,dueDate,priority)
         this.todoList.push(newTodo)
     },
 
@@ -278,15 +269,21 @@
             buttonsDiv.appendChild(editBtn)
 
             editBtn.addEventListener('click',() => {
-                let div = editBtn.parentNode.parentNode;
-                if (this.editOpen[div.id] === true) {
-                    this.editOpen[div.id] === false;
+                const content = document.querySelector('.content')
+                let ide = editBtn.parentNode.parentNode;
+                let id = ide.id
+                
+                if (element.editOpen === true) {
+                    let elemento = document.querySelectorAll(`.editForm.${id}`)
+                    console.log(elemento)
+                    elemento.parentNode.removeChild(elemento);
+                    element.editOpen = false;
+                    return
                 }
                 else {
-                    this.editOpen[div.id] = true;
+                    this.addForm('editForm','editFormUp',id,true);
+                    element.editOpen = true;
                 }
-                
-                this.editFormFunc(div.id);
             })
 
             if (element.priority === 'blue') {
@@ -299,7 +296,9 @@
 
             todoss.appendChild(newDiv)
             this.i++
+            
         });
+        
     }
 }
 
